@@ -604,14 +604,14 @@ body{padding-bottom:92px}
   .steps{grid-template-columns:repeat(3,1fr)}
   .ex-card{display:block}
   .ex-grid{display:grid;grid-template-columns:1fr 1.25fr}
-  .ex-media img{height:100%}
+  .ex-media img{height:100%;max-height:380px}
   .ex-cols{grid-template-columns:1fr 1fr}
   .price-grid{grid-template-columns:1.15fr 1fr}
 }
 @media (min-width:960px){
   .hero-in{grid-template-columns:1.12fr .88fr;align-items:center;padding-top:52px;padding-bottom:60px}
   section{padding:64px 0}
-  .ex-media img{height:100%}
+  .ex-media img{height:100%;max-height:380px}
   .cat img{height:170px}
 }
 </style>
@@ -1280,6 +1280,10 @@ body{padding-bottom:92px}
       var open = details.classList.toggle("open");
       toggle.setAttribute("aria-expanded", open ? "true" : "false");
       toggle.textContent = open ? "Replier l'exemple" : "Voir l'exemple complet";
+      if(!open){
+        var r = card.getBoundingClientRect();
+        if(r.top < 70){ window.scrollTo({ top: window.pageYOffset + r.top - 84, behavior: reduceMotion ? "auto" : "smooth" }); }
+      }
     });
 
     grid.appendChild(body);
@@ -1308,10 +1312,21 @@ body{padding-bottom:92px}
   }
   function goTo(i){
     current = Math.max(0, Math.min(keys.length - 1, i));
+    /* Replier les exemples ouverts : sinon la page reste longue et le nouvel exemple est hors de l'écran. */
+    track.querySelectorAll(".ex-details.open").forEach(function(d){
+      d.classList.remove("open");
+      var t = d.parentNode.querySelector(".ex-toggle");
+      if(t){ t.setAttribute("aria-expanded", "false"); t.textContent = "Voir l'exemple complet"; }
+    });
     var slide = track.children[current];
     if(slide){
       var left = slide.offsetLeft - (viewport.clientWidth - slide.offsetWidth) / 2;
       viewport.scrollTo({ left: left, behavior: reduceMotion ? "auto" : "smooth" });
+    }
+    /* Si on avait défilé plus bas (exemple déplié), remettre le carrousel en haut de l'écran. */
+    var rect = viewport.getBoundingClientRect();
+    if(rect.top < 70){
+      window.scrollTo({ top: window.pageYOffset + rect.top - 84, behavior: reduceMotion ? "auto" : "smooth" });
     }
     updateNav();
   }
