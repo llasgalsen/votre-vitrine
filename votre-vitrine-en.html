@@ -75,13 +75,26 @@
       .brand i{font-style:italic;color:var(--coral);}
       .brand-logo{width:38px;height:38px;border-radius:10px;display:block;flex:0 0 auto;}
       nav.main{display:flex;align-items:center;gap:4px;flex-wrap:wrap;justify-content:flex-end;}
-      nav.main a{
+      nav.main a,nav.main button{
         text-decoration:none;font-size:.92rem;font-weight:500;color:var(--on-dark-dim);
         padding:10px 12px;border-radius:999px;min-height:2.75rem;display:inline-flex;align-items:center;
         transition:color .25s ease,background .25s ease;
       }
-      nav.main a:hover{color:var(--on-dark);background:rgba(250,246,238,.08);}
+      nav.main button{font-family:inherit;background:none;border:none;cursor:pointer;white-space:nowrap;}
+      nav.main a:hover,nav.main button:hover{color:var(--on-dark);background:rgba(250,246,238,.08);}
       nav.main a.lang{border:1px solid var(--line-dark);color:var(--on-dark);font-weight:600;}
+      @media (max-width:700px){
+        .header-in{flex-wrap:wrap;gap:8px 12px;padding-top:14px;padding-bottom:14px;}
+        .brand{font-size:1.22rem;}
+        .brand-logo{width:34px;height:34px;}
+        nav.main{flex-wrap:nowrap;justify-content:flex-start;gap:2px;width:100%;}
+        nav.main a,nav.main button{font-size:.84rem;padding:8px 8px;white-space:nowrap;min-height:2.5rem;}
+        nav.main a.lang{padding:8px 10px;}
+      }
+      @media (max-width:380px){
+        nav.main a,nav.main button{font-size:.79rem;padding:8px 6px;}
+        nav.main a.lang{padding:8px 8px;}
+      }
 
       /* ---------- Hero ---------- */
       .hero{background:var(--ink);position:relative;overflow:visible;padding:34px 0 0;}
@@ -622,6 +635,7 @@
           <a href="#prix">Pricing</a>
           <a href="#questions">Questions</a>
           <a href="#contact">Contact</a>
+          <button type="button" data-open="flyer-full" aria-label="Show the QR code full screen">QR Code</button>
           <a class="lang" href="https://www.votrevitrine.ca/votre-vitrine.html" hreflang="fr">FR</a>
         </nav>
       </div>
