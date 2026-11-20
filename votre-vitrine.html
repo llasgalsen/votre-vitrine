@@ -492,6 +492,87 @@
       .to-top.show{opacity:1;visibility:visible;transform:translateY(0);}
       .to-top:hover{background:var(--ink-soft);}
       body{padding-bottom:0;}
+
+      /* ---------- Assistant de réponses ---------- */
+      /* Le retour-en-haut passe au-dessus de l'assistant pour ne jamais être recouvert */
+      .to-top{bottom:88px !important;}
+      .chat-toggle{
+        position:fixed;right:18px;bottom:18px;z-index:65;
+        display:inline-flex;align-items:center;gap:9px;
+        background:var(--coral);color:#fff;border:none;cursor:pointer;
+        font:inherit;font-weight:700;font-size:.98rem;
+        padding:0 20px 0 16px;height:56px;border-radius:999px;
+        box-shadow:0 16px 34px rgba(0,0,0,.32),0 6px 16px rgba(255,107,74,.35);
+        transition:background .25s ease,transform .25s ease;
+      }
+      .chat-toggle:hover{background:var(--coral-dark);transform:translateY(-2px);}
+      .chat-toggle svg{width:22px;height:22px;flex:0 0 auto;}
+      .chat-panel{
+        position:fixed;right:18px;bottom:86px;z-index:70;
+        width:min(392px,calc(100vw - 24px));
+        height:min(620px,calc(100dvh - 108px));
+        background:var(--cream);color:var(--on-light);
+        border-radius:22px;overflow:hidden;
+        display:none;flex-direction:column;
+        box-shadow:0 28px 60px rgba(0,0,0,.42),0 10px 26px rgba(0,0,0,.22);
+        border:1px solid rgba(12,37,48,.12);
+      }
+      .chat-panel.open{display:flex;}
+      @media (max-width:560px){
+        .chat-panel{right:12px;left:12px;width:auto;bottom:84px;height:min(680px,calc(100dvh - 100px));}
+        .chat-toggle{right:14px;bottom:14px;}
+        .to-top{right:14px;bottom:84px !important;}
+      }
+      .chat-head{
+        background:var(--ink);color:var(--on-dark);
+        padding:16px 18px;display:flex;align-items:flex-start;justify-content:space-between;gap:12px;flex:0 0 auto;
+      }
+      .chat-head-title{font-family:"Fraunces",Georgia,serif;font-size:1.22rem;font-weight:700;line-height:1.1;}
+      .chat-head-sub{font-size:.82rem;color:var(--on-dark-dim);margin-top:4px;line-height:1.4;font-family:"Inter",sans-serif;}
+      .chat-close{
+        flex:0 0 auto;width:40px;height:40px;border-radius:50%;border:1px solid var(--line-dark);
+        background:rgba(250,246,238,.08);color:var(--on-dark);cursor:pointer;font-size:1.25rem;line-height:1;
+        display:grid;place-items:center;
+      }
+      .chat-close:hover{background:rgba(250,246,238,.16);}
+      .chat-messages{
+        flex:1 1 auto;overflow-y:auto;padding:16px 14px 8px;display:flex;flex-direction:column;gap:10px;
+        -webkit-overflow-scrolling:touch;
+      }
+      .chat-msg{max-width:88%;padding:12px 14px;border-radius:16px;font-size:.95rem;line-height:1.55;white-space:pre-wrap;word-break:break-word;}
+      .chat-msg.bot{background:#fff;border:1px solid var(--line-light);border-bottom-left-radius:6px;align-self:flex-start;color:var(--on-light);}
+      .chat-msg.user{background:var(--ink);color:var(--cream);border-bottom-right-radius:6px;align-self:flex-end;}
+      .chat-note{font-size:.76rem;color:var(--on-light-dim);line-height:1.45;padding:0 4px;}
+      .chat-actions{display:flex;flex-wrap:wrap;gap:8px;margin-top:10px;}
+      .chat-actions a{
+        flex:1 1 140px;text-align:center;text-decoration:none;font-weight:700;font-size:.88rem;
+        padding:11px 10px;border-radius:999px;min-height:2.75rem;display:inline-flex;align-items:center;justify-content:center;
+      }
+      .chat-actions a.wa{background:var(--coral);color:#fff;}
+      .chat-actions a.mail{background:#fff;border:1px solid rgba(12,37,48,.3);color:var(--ink);}
+      .chat-quick{
+        flex:0 0 auto;padding:10px 12px 6px;border-top:1px solid var(--line-light);background:var(--cream-2);
+      }
+      .chat-quick p{font-size:.78rem;font-weight:700;letter-spacing:.04em;text-transform:uppercase;color:var(--on-light-dim);margin-bottom:8px;}
+      .chat-quick-list{display:flex;flex-wrap:wrap;gap:7px;max-height:118px;overflow-y:auto;padding-bottom:4px;}
+      .chat-chip{
+        border:1px solid rgba(12,37,48,.22);background:#fff;color:var(--ink);cursor:pointer;font:inherit;
+        font-size:.86rem;font-weight:600;padding:9px 12px;border-radius:999px;min-height:2.5rem;line-height:1.2;text-align:left;
+      }
+      .chat-chip:hover{border-color:var(--coral);background:rgba(255,107,74,.07);}
+      .chat-form{
+        flex:0 0 auto;display:flex;gap:8px;padding:10px 12px 12px;background:var(--cream-2);border-top:1px solid var(--line-light);
+      }
+      .chat-form input{
+        flex:1 1 auto;min-width:0;font:inherit;font-size:1rem;padding:12px 14px;border-radius:999px;
+        border:1px solid rgba(12,37,48,.25);background:#fff;color:var(--ink);min-height:3rem;
+      }
+      .chat-form input:focus{outline:2px solid var(--coral);outline-offset:1px;border-color:transparent;}
+      .chat-form button{
+        flex:0 0 auto;border:none;cursor:pointer;font:inherit;font-weight:700;font-size:.95rem;
+        background:var(--ink);color:var(--cream);border-radius:999px;padding:0 18px;min-height:3rem;
+      }
+      .chat-form button:hover{background:var(--ink-soft);}
     </style>
   </head>
   <body>
@@ -975,6 +1056,40 @@
       </div>
     </footer>
 
+    <!-- Assistant de réponses -->
+    <button class="chat-toggle" id="chatToggle" type="button" aria-haspopup="dialog" aria-expanded="false" aria-controls="chatPanel">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 11.5a8.5 8.5 0 0 1-12.4 7.6L3 21l1.9-5.6A8.5 8.5 0 1 1 21 11.5z"/></svg>
+      <span>Une question&nbsp;?</span>
+    </button>
+
+    <div class="chat-panel" id="chatPanel" role="dialog" aria-modal="false" aria-label="Assistant de réponses Votre Vitrine" hidden>
+      <div class="chat-head">
+        <div>
+          <div class="chat-head-title">Votre Vitrine</div>
+          <p class="chat-head-sub">Assistant automatique — on vous répond tout de suite</p>
+        </div>
+        <button class="chat-close" id="chatClose" type="button" aria-label="Fermer l'assistant">×</button>
+      </div>
+      <div class="chat-messages" id="chatMessages" aria-live="polite"></div>
+      <div class="chat-quick" aria-label="Questions rapides">
+        <p>Questions rapides</p>
+        <div class="chat-quick-list" id="chatQuickList">
+          <button type="button" class="chat-chip" data-answer="prix">C'est combien&nbsp;?</button>
+          <button type="button" class="chat-chip" data-answer="delai">En combien de temps&nbsp;?</button>
+          <button type="button" class="chat-chip" data-answer="pas_aimee">Et si la démo ne me plaît pas&nbsp;?</button>
+          <button type="button" class="chat-chip" data-answer="inclus">Qu'est-ce qui est inclus&nbsp;?</button>
+          <button type="button" class="chat-chip" data-answer="commander">Comment je commande&nbsp;?</button>
+          <button type="button" class="chat-chip" data-answer="modifications">Les modifications, comment ça marche&nbsp;?</button>
+          <button type="button" class="chat-chip" data-answer="demo">Je veux ma démo gratuite</button>
+        </div>
+      </div>
+      <form class="chat-form" id="chatForm">
+        <label class="sr-only" for="chatInput" style="position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0);">Écrivez votre question</label>
+        <input id="chatInput" type="text" placeholder="Écrivez votre question…" autocomplete="off" />
+        <button type="submit">Envoyer</button>
+      </form>
+    </div>
+
     <!-- Retour en haut -->
     <button class="to-top" id="toTop" type="button" aria-label="Retour en haut de la page">
       <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 19V5M5 12l7-7 7 7"/></svg>
@@ -1056,6 +1171,119 @@
           if (e.key === 'Escape') {
             document.querySelectorAll('.ex-overlay.open').forEach(function (ov) { closeExample(ov); });
           }
+        });
+
+        // ---------- Assistant de réponses (tout se passe dans la page, rien n'est enregistré ni envoyé) ----------
+        var chatToggle = document.getElementById('chatToggle');
+        var chatPanel = document.getElementById('chatPanel');
+        var chatClose = document.getElementById('chatClose');
+        var chatMessages = document.getElementById('chatMessages');
+        var chatForm = document.getElementById('chatForm');
+        var chatInput = document.getElementById('chatInput');
+        var chatStarted = false;
+
+        var CHAT_ANSWERS = {
+          prix: "La page coûte 399 $ une seule fois — prix de lancement jusqu'au 30 novembre 2026, après ce sera 449 $. Et vous payez à la livraison, seulement si vous aimez votre page. Aucun dépôt. L'entretien est ensuite à 29 $ par mois, après 3 mois offerts.",
+          delai: "Votre page est en ligne dans les 48 heures après votre accord. On vous la livre d'abord, et vous payez à la livraison, seulement si elle vous plaît.",
+          pas_aimee: "Vous ne payez rien. La démo est gratuite et sans engagement : vous décidez quand vous voyez le résultat, avec vos vraies informations, sur votre téléphone.",
+          inclus: "Votre page complète : vos services et vos prix, vos horaires, votre adresse avec Google Maps, vos photos, le bouton WhatsApp, l'appel en un toucher et vos réseaux sociaux en bas de page.",
+          commander: "C'est simple : demandez votre démo gratuite sur WhatsApp ou par courriel (contact@votrevitrine.ca). On la prépare avec vos vraies informations, vous la regardez sur votre téléphone, et vous décidez.",
+          modifications: "L'entretien comprend 2 modifications par mois : un prix qui change, des horaires, une photo… Chaque modification supplémentaire coûte 10 $. Les 3 premiers mois d'entretien sont offerts.",
+          demo: "Avec plaisir ! Touchez le bouton WhatsApp ci-dessous, ou écrivez à contact@votrevitrine.ca : on prépare votre démo avec le nom de votre commerce, vos services, vos prix, vos horaires et vos photos.",
+          bonjour: "Bonjour ! Touchez une question ci-dessous, ou écrivez la vôtre.",
+          defaut: "On n'a pas la réponse à celle-là ici — mais on peut vous répondre directement :"
+        };
+
+        function chatScroll() {
+          if (chatMessages) chatMessages.scrollTop = chatMessages.scrollHeight;
+        }
+        function addChatMsg(text, who) {
+          var div = document.createElement('div');
+          div.className = 'chat-msg ' + who;
+          div.textContent = text;
+          chatMessages.appendChild(div);
+          chatScroll();
+          return div;
+        }
+        function addChatActions(container) {
+          var wrap = document.createElement('div');
+          wrap.className = 'chat-actions';
+          var wa = document.createElement('a');
+          wa.className = 'wa'; wa.href = 'https://wa.me/15146880872'; wa.target = '_blank'; wa.rel = 'noopener'; wa.textContent = 'Écrire sur WhatsApp';
+          var mail = document.createElement('a');
+          mail.className = 'mail'; mail.href = 'mailto:contact@votrevitrine.ca'; mail.textContent = 'Écrire un courriel';
+          wrap.appendChild(wa); wrap.appendChild(mail);
+          container.appendChild(wrap);
+          chatScroll();
+        }
+        function botAnswer(key) {
+          var text = CHAT_ANSWERS[key] || CHAT_ANSWERS.defaut;
+          var msg = addChatMsg(text, 'bot');
+          if (key === 'demo' || key === 'defaut') addChatActions(msg);
+        }
+        function normalizeChat(s) {
+          return (s || '').toLowerCase().normalize('NFD').replace(/[\u0300-\u036f]/g, '').replace(/[^a-z0-9 ]/g, ' ').replace(/\s+/g, ' ').trim();
+        }
+        function matchChat(raw) {
+          var t = ' ' + normalizeChat(raw) + ' ';
+          if (t.indexOf(' bonjour ') !== -1 || t.indexOf(' salut ') !== -1) return 'bonjour';
+          if (t.indexOf('plait pas') !== -1 || t.indexOf('aime pas') !== -1 || t.indexOf('plait-pas') !== -1) return 'pas_aimee';
+          if (/(prix|combien|coute|tarif|paiement|payer|depot)/.test(t)) return 'prix';
+          if (/(temps|delai|48|rapide|quand)/.test(t)) return 'delai';
+          if (/(modification|changement|changer)/.test(t)) return 'modifications';
+          if (/(commande|commander|commencer|partir)/.test(t)) return 'commander';
+          if (/(inclus|compris|offre)/.test(t)) return 'inclus';
+          if (t.indexOf('demo') !== -1) return 'demo';
+          return 'defaut';
+        }
+        function initChat() {
+          if (chatStarted) return;
+          chatStarted = true;
+          addChatMsg("Bonjour ! Vous avez une question sur votre future page ? Touchez une question ci-dessous, ou écrivez la vôtre.", 'bot');
+          var note = document.createElement('p');
+          note.className = 'chat-note';
+          note.textContent = "Assistant automatique : les réponses sont toutes prêtes, ce n'est pas une vraie personne.";
+          chatMessages.appendChild(note);
+          chatScroll();
+        }
+        function openChat() {
+          initChat();
+          chatPanel.hidden = false;
+          // force reflow for display
+          void chatPanel.offsetWidth;
+          chatPanel.classList.add('open');
+          chatToggle.setAttribute('aria-expanded', 'true');
+          if (chatInput) chatInput.focus();
+          chatScroll();
+        }
+        function closeChat() {
+          chatPanel.classList.remove('open');
+          chatPanel.hidden = true;
+          chatToggle.setAttribute('aria-expanded', 'false');
+          chatToggle.focus();
+        }
+        function toggleChat() {
+          if (chatPanel.classList.contains('open')) closeChat(); else openChat();
+        }
+        if (chatToggle) chatToggle.addEventListener('click', toggleChat);
+        if (chatClose) chatClose.addEventListener('click', closeChat);
+        document.querySelectorAll('#chatQuickList .chat-chip').forEach(function (chip) {
+          chip.addEventListener('click', function () {
+            var key = chip.getAttribute('data-answer');
+            addChatMsg(chip.textContent.trim(), 'user');
+            botAnswer(key);
+          });
+        });
+        if (chatForm) chatForm.addEventListener('submit', function (e) {
+          e.preventDefault();
+          var val = (chatInput.value || '').trim();
+          if (!val) return;
+          addChatMsg(val, 'user');
+          chatInput.value = '';
+          botAnswer(matchChat(val));
+        });
+        document.addEventListener('keydown', function (e) {
+          if (e.key === 'Escape' && chatPanel && chatPanel.classList.contains('open')) closeChat();
         });
       })();
     </script>
