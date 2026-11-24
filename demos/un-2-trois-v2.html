@@ -242,5 +242,70 @@ const io = new IntersectionObserver(es => es.forEach(e => { if (e.isIntersecting
 document.querySelectorAll('.reveal').forEach(el => io.observe(el));
 </script>
 
+<!-- VISIONNEUSE PLEIN ÉCRAN — ajoutée le 2026-11-24 : toucher une photo l'ouvre en grand -->
+<style>
+  .vv-zoomable{cursor:zoom-in}
+  #vv-lightbox{position:fixed;inset:0;z-index:9999;background:rgba(8,8,10,.96);display:none;flex-direction:column;align-items:center;justify-content:center}
+  #vv-lightbox.open{display:flex}
+  #vv-lightbox img{max-width:100vw;max-height:82vh;object-fit:contain;box-shadow:0 10px 60px rgba(0,0,0,.6)}
+  #vv-lb-cap{color:#f2f2f2;font-family:system-ui,-apple-system,sans-serif;font-size:15px;line-height:1.45;text-align:center;padding:14px 22px 4px;max-width:640px}
+  #vv-lb-close{position:absolute;top:calc(env(safe-area-inset-top,0px) + 14px);right:16px;width:46px;height:46px;border-radius:50%;border:1px solid rgba(255,255,255,.35);background:rgba(255,255,255,.08);color:#fff;font-size:22px;line-height:1;cursor:pointer}
+  .vv-lb-nav{position:absolute;top:50%;transform:translateY(-50%);width:46px;height:46px;border-radius:50%;border:1px solid rgba(255,255,255,.35);background:rgba(255,255,255,.08);color:#fff;font-size:26px;line-height:1;cursor:pointer}
+  #vv-lb-prev{left:12px}#vv-lb-next{right:12px}
+  #vv-lb-count{position:absolute;bottom:calc(env(safe-area-inset-bottom,0px) + 16px);left:50%;transform:translateX(-50%);color:rgba(255,255,255,.75);font-family:system-ui,-apple-system,sans-serif;font-size:13px;letter-spacing:.08em}
+</style>
+<div id="vv-lightbox" role="dialog" aria-modal="true" aria-label="Photo en plein écran">
+  <button id="vv-lb-close" aria-label="Fermer">✕</button>
+  <button class="vv-lb-nav" id="vv-lb-prev" aria-label="Photo précédente">‹</button>
+  <img id="vv-lb-img" alt="">
+  <button class="vv-lb-nav" id="vv-lb-next" aria-label="Photo suivante">›</button>
+  <div id="vv-lb-cap"></div>
+  <div id="vv-lb-count"></div>
+</div>
+<script>
+(function(){
+  var imgs=[].slice.call(document.querySelectorAll('img')).filter(function(im){
+    return !im.closest('a') && im.id!=='vv-lb-img';
+  });
+  if(!imgs.length) return;
+  imgs.forEach(function(im){ im.classList.add('vv-zoomable'); });
+  var box=document.getElementById('vv-lightbox'),
+      big=document.getElementById('vv-lb-img'),
+      cap=document.getElementById('vv-lb-cap'),
+      cnt=document.getElementById('vv-lb-count'),
+      idx=0, startX=null;
+  function show(i){
+    idx=(i+imgs.length)%imgs.length;
+    var im=imgs[idx];
+    big.src=im.currentSrc||im.src;
+    var a=(im.getAttribute('alt')||'').trim();
+    big.alt=a; cap.textContent=a; cap.style.display=a?'block':'none';
+    cnt.textContent=(idx+1)+' / '+imgs.length;
+    document.getElementById('vv-lb-prev').style.display=imgs.length>1?'block':'none';
+    document.getElementById('vv-lb-next').style.display=imgs.length>1?'block':'none';
+  }
+  function open(i){ show(i); box.classList.add('open'); document.body.style.overflow='hidden'; }
+  function close(){ box.classList.remove('open'); document.body.style.overflow=''; }
+  imgs.forEach(function(im,i){ im.addEventListener('click',function(){ open(i); }); });
+  document.getElementById('vv-lb-close').addEventListener('click',function(e){ e.stopPropagation(); close(); });
+  document.getElementById('vv-lb-prev').addEventListener('click',function(e){ e.stopPropagation(); show(idx-1); });
+  document.getElementById('vv-lb-next').addEventListener('click',function(e){ e.stopPropagation(); show(idx+1); });
+  box.addEventListener('click',function(e){ if(e.target===box||e.target===big) close(); });
+  document.addEventListener('keydown',function(e){
+    if(!box.classList.contains('open')) return;
+    if(e.key==='Escape') close();
+    if(e.key==='ArrowLeft') show(idx-1);
+    if(e.key==='ArrowRight') show(idx+1);
+  });
+  box.addEventListener('touchstart',function(e){ startX=e.touches[0].clientX; },{passive:true});
+  box.addEventListener('touchend',function(e){
+    if(startX===null) return;
+    var dx=e.changedTouches[0].clientX-startX;
+    if(Math.abs(dx)>48) show(idx+(dx<0?1:-1));
+    startX=null;
+  },{passive:true});
+})();
+</script>
+
 </body>
 </html>
