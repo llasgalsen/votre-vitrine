@@ -1,0 +1,245 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="robots" content="noindex, nofollow">
+<title>Salon Clip Coiffure — Saint-Hyacinthe | Démo Votre Vitrine v2</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,500;12..96,700;12..96,800&family=Instrument+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+:root{
+  --creme:#FFFBF2; --rouge:#E5322D; --charbon:#232228; --rose:#FBE3DC;
+  --c60:rgba(35,34,40,.6); --c40:rgba(35,34,40,.4); --c12:rgba(35,34,40,.12);
+  --rayon:14px;
+}
+*{margin:0;padding:0;box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{font-family:'Instrument Sans',system-ui,sans-serif;background:var(--creme);color:var(--charbon);-webkit-font-smoothing:antialiased}
+.wrap{max-width:1060px;margin:0 auto;padding:0 20px}
+h1,h2,.titre{font-family:'Bricolage Grotesque','Arial Black',system-ui,sans-serif}
+.reveal{opacity:0;transform:translateY(22px);transition:opacity .7s ease,transform .7s ease}
+.reveal.vu{opacity:1;transform:none}
+.bandeau{background:var(--charbon);color:var(--creme);font-size:.72rem;letter-spacing:.04em;text-align:center;padding:9px 14px;line-height:1.5}
+.bandeau strong{color:#FF8A85}
+
+/* Ligne de coupe signature */
+.coupe{display:flex;align-items:center;gap:12px;margin:0 auto;max-width:1060px;padding:0 20px;color:var(--rouge)}
+.coupe::before,.coupe::after{content:"";flex:1;border-top:3px dashed var(--c40)}
+.coupe span{font-size:1.3rem;transform:rotate(-90deg);display:inline-block}
+
+/* Hero affiche typographique */
+.hero{padding:56px 0 50px;text-align:left}
+.eyebrow{display:inline-flex;align-items:center;gap:10px;font-size:.78rem;font-weight:700;letter-spacing:.24em;text-transform:uppercase;color:var(--rouge)}
+.eyebrow::before{content:"";width:34px;height:3px;background:var(--rouge)}
+.hero .salon{font-family:'Bricolage Grotesque',sans-serif;font-weight:700;font-size:clamp(1.6rem,6vw,2.4rem);letter-spacing:.34em;text-transform:uppercase;margin-top:20px}
+.hero h1{font-size:clamp(6rem,30vw,13rem);line-height:.86;font-weight:800;letter-spacing:-.01em;color:var(--charbon)}
+.hero h1 .rouge{color:var(--rouge)}
+.hero .coiffure{font-family:'Bricolage Grotesque',sans-serif;font-weight:700;font-size:clamp(1.6rem,6vw,2.4rem);letter-spacing:.34em;text-transform:uppercase}
+.hero .manifeste{font-size:clamp(1.25rem,5vw,1.7rem);line-height:1.4;font-weight:600;max-width:30ch;margin-top:26px}
+.hero .manifeste strong{color:var(--rouge)}
+.badges{display:flex;flex-wrap:wrap;gap:9px;margin:28px 0 30px}
+.badge{display:inline-flex;align-items:center;gap:7px;background:#fff;border:2px solid var(--charbon);color:var(--charbon);font-size:.88rem;font-weight:700;padding:9px 14px;border-radius:999px;box-shadow:4px 4px 0 var(--charbon)}
+.badge .etoile{color:var(--rouge)}
+.cta{display:flex;flex-wrap:wrap;gap:12px}
+.btn{display:inline-flex;align-items:center;gap:9px;font-weight:700;font-size:1.02rem;padding:16px 26px;border-radius:999px;text-decoration:none;transition:transform .15s ease;border:2px solid var(--charbon)}
+.btn:active{transform:scale(.97)}
+.btn-rouge{background:var(--rouge);color:#fff;box-shadow:5px 5px 0 var(--charbon)}
+.btn-ligne{background:#fff;color:var(--charbon);box-shadow:5px 5px 0 var(--c12)}
+
+section{padding:66px 0}
+.kicker{font-size:.78rem;font-weight:700;letter-spacing:.24em;text-transform:uppercase;color:var(--rouge)}
+h2{font-size:clamp(2.2rem,8.4vw,3.4rem);line-height:1.02;font-weight:800;margin:10px 0 14px}
+h2 em{font-style:normal;color:var(--rouge)}
+.sous{font-size:1.05rem;line-height:1.55;color:var(--c60);max-width:56ch}
+
+/* Avis : la cliente fidèle + répartition */
+.citation{background:#fff;border:2.5px solid var(--charbon);border-radius:var(--rayon);box-shadow:8px 8px 0 var(--rose);padding:32px 28px;margin-top:34px}
+.citation .stars{color:var(--rouge);letter-spacing:4px;font-size:1.2rem}
+.citation blockquote{font-family:'Bricolage Grotesque',sans-serif;font-weight:700;font-size:clamp(1.5rem,5.6vw,2.1rem);line-height:1.3;margin:16px 0 14px}
+.citation cite{font-style:normal;font-weight:700;font-size:.95rem}
+.citation cite span{color:var(--c60);font-weight:500}
+.annie{display:flex;gap:18px;align-items:center;background:var(--rose);border-radius:var(--rayon);padding:22px 24px;margin-top:18px}
+.annie .initiale{flex:0 0 auto;width:64px;height:64px;border-radius:50%;background:var(--rouge);color:#fff;display:flex;align-items:center;justify-content:center;font-family:'Bricolage Grotesque',sans-serif;font-weight:800;font-size:1.9rem}
+.annie b{font-family:'Bricolage Grotesque',sans-serif;font-size:1.4rem;display:block}
+.annie p{color:var(--c60);line-height:1.45}
+.repartition{background:var(--charbon);color:var(--creme);border-radius:var(--rayon);padding:28px;margin-top:18px;display:grid;gap:22px}
+@media(min-width:760px){.repartition{grid-template-columns:auto 1fr;align-items:center}}
+.repartition .grosse{font-family:'Bricolage Grotesque',sans-serif;font-size:4.6rem;font-weight:800;line-height:1}
+.repartition .grosse small{display:block;font-family:'Instrument Sans',sans-serif;font-size:.92rem;font-weight:600;color:rgba(255,251,242,.75);margin-top:6px}
+.barres{display:grid;gap:9px}
+.barre-note{display:flex;align-items:center;gap:12px;font-size:.92rem;font-weight:600}
+.barre-note .et{width:74px;white-space:nowrap}
+.barre-note .piste{flex:1;height:12px;background:rgba(255,251,242,.18);border-radius:99px;overflow:hidden}
+.barre-note .plein{height:100%;background:var(--rouge);border-radius:99px}
+.barre-note .n{width:52px;text-align:right;color:rgba(255,251,242,.8)}
+
+/* Services (exemples étiquetés) */
+.etiquette{display:block;border:2.5px dashed var(--rouge);color:var(--rouge);border-radius:var(--rayon);padding:16px 20px;font-weight:600;line-height:1.55;margin-top:30px;background:#fff}
+.etiquette b{font-family:'Bricolage Grotesque',sans-serif;text-transform:uppercase;letter-spacing:.06em}
+.svc-liste{margin-top:26px;display:grid;gap:14px}
+@media(min-width:760px){.svc-liste{grid-template-columns:1fr 1fr}}
+.svc{background:#fff;border:2px solid var(--charbon);border-radius:var(--rayon);padding:22px;box-shadow:6px 6px 0 var(--c12)}
+.svc .num{font-family:'Bricolage Grotesque',sans-serif;font-weight:800;color:var(--rouge);font-size:1rem;letter-spacing:.1em}
+.svc h3{font-family:'Bricolage Grotesque',sans-serif;font-size:1.35rem;font-weight:700;margin:5px 0 7px}
+.svc p{color:var(--c60);line-height:1.55;font-size:.97rem}
+.note-appel{margin-top:26px;font-size:1.05rem;line-height:1.55}
+.note-appel a{color:var(--rouge);font-weight:700}
+
+/* Heures en 7 cases */
+.jours{display:grid;grid-template-columns:repeat(2,1fr);gap:10px;margin-top:32px}
+@media(min-width:760px){.jours{grid-template-columns:repeat(4,1fr)}}
+.jour{border:2px solid var(--charbon);border-radius:var(--rayon);padding:16px;background:#fff}
+.jour b{font-family:'Bricolage Grotesque',sans-serif;display:block;font-size:1.05rem;text-transform:uppercase;letter-spacing:.05em}
+.jour span{font-weight:600;font-size:.98rem}
+.jour .soir{display:inline-block;margin-top:7px;background:var(--rouge);color:#fff;font-size:.72rem;font-weight:700;letter-spacing:.08em;padding:4px 9px;border-radius:999px;text-transform:uppercase}
+.jour.ferme{background:transparent;border-color:var(--c40);color:var(--c40);box-shadow:none}
+.jour.ouvert{box-shadow:5px 5px 0 var(--rose)}
+
+/* Contact */
+.contact{background:var(--charbon);color:var(--creme)}
+.contact .kicker{color:#FF8A85}
+.contact h2{color:var(--creme)}
+.grille{display:grid;gap:28px;margin-top:28px}
+@media(min-width:760px){.grille{grid-template-columns:1fr 1fr}}
+.contact .bloc b{display:block;font-size:.78rem;letter-spacing:.2em;text-transform:uppercase;color:#FF8A85;margin-bottom:9px}
+.contact .adr{font-family:'Bricolage Grotesque',sans-serif;font-size:1.55rem;line-height:1.35;font-weight:700}
+.contact a{color:var(--creme)}
+.tel-grand{font-size:clamp(1.7rem,7vw,2.3rem);font-weight:800;text-decoration:none;font-family:'Bricolage Grotesque',sans-serif}
+.contact .note{color:rgba(255,251,242,.8);line-height:1.6}
+footer{background:#19181D;color:#9B98A3;text-align:center;padding:30px 18px 110px;font-size:.86rem;line-height:1.6}
+footer b{color:var(--creme)}
+
+.barre{position:fixed;left:0;right:0;bottom:0;z-index:50;padding:10px 14px calc(10px + env(safe-area-inset-bottom));background:rgba(35,34,40,.95);backdrop-filter:blur(8px);display:flex;gap:10px}
+.barre a{flex:1;text-align:center;padding:15px;border-radius:999px;font-weight:700;text-decoration:none;font-size:1rem}
+.barre .a1{background:var(--rouge);color:#fff}
+.barre .a2{border:2px solid rgba(255,251,242,.5);color:var(--creme)}
+@media(min-width:760px){.barre{display:none} footer{padding-bottom:34px}}
+</style>
+</head>
+<body>
+
+<div class="bandeau"><strong>EXEMPLE DE SITE — DÉMO VOTRE VITRINE</strong> · Présenté à titre d'exemple, ce n'est pas le site officiel du salon</div>
+
+<header class="hero">
+  <div class="wrap">
+    <span class="eyebrow">Salon de coiffure — Saint-Hyacinthe</span>
+    <p class="salon">Salon</p>
+    <h1>CL<span class="rouge">I</span>P</h1>
+    <p class="coiffure">Coiffure</p>
+    <p class="manifeste">Votre salon de coiffure de quartier, rue Martel — où l'on vient voir <strong>Annie</strong> depuis des années.</p>
+    <div class="badges">
+      <span class="badge"><span class="etoile">★</span> 4,5 sur Google · 4 avis</span>
+      <span class="badge">Jeudi et vendredi ouverts en soirée</span>
+      <span class="badge">2360 rue Martel</span>
+    </div>
+    <div class="cta">
+      <a class="btn btn-rouge" href="tel:+14507711441">📞 Appeler</a>
+      <a class="btn btn-ligne" href="#heures">Voir les heures</a>
+    </div>
+  </div>
+</header>
+
+<div class="coupe" aria-hidden="true"><span>✂</span></div>
+
+<section>
+  <div class="wrap">
+    <p class="kicker reveal">Avis Google</p>
+    <h2 class="reveal">Ce que dit une<br><em>cliente fidèle</em></h2>
+    <div class="citation reveal">
+      <div class="stars">★★★★★</div>
+      <blockquote>« Ça fait des années que je vais voir Annie. Elle est compétente, sympathique et c'est toujours plaisant »</blockquote>
+      <cite>Julie Bonin <span>— 5 étoiles, avis Google</span></cite>
+    </div>
+    <div class="annie reveal">
+      <div class="initiale">A</div>
+      <div>
+        <b>Annie</b>
+        <p>La coiffeuse citée par sa cliente — celle qu'on revient voir, année après année.</p>
+      </div>
+    </div>
+    <div class="repartition reveal">
+      <div class="grosse">4,5<small>sur Google — 4 avis</small></div>
+      <div class="barres">
+        <div class="barre-note"><span class="et">5 étoiles</span><span class="piste"><span class="plein" style="display:block;width:100%"></span></span><span class="n">3 avis</span></div>
+        <div class="barre-note"><span class="et">4 étoiles</span><span class="piste"><span class="plein" style="display:block;width:0%"></span></span><span class="n">0 avis</span></div>
+        <div class="barre-note"><span class="et">3 étoiles</span><span class="piste"><span class="plein" style="display:block;width:33%"></span></span><span class="n">1 avis</span></div>
+        <div class="barre-note"><span class="et">2 étoiles</span><span class="piste"><span class="plein" style="display:block;width:0%"></span></span><span class="n">0 avis</span></div>
+        <div class="barre-note"><span class="et">1 étoile</span><span class="piste"><span class="plein" style="display:block;width:0%"></span></span><span class="n">0 avis</span></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<div class="coupe" aria-hidden="true"><span>✂</span></div>
+
+<section id="services">
+  <div class="wrap">
+    <p class="kicker reveal">Nos services</p>
+    <h2 class="reveal">Le métier,<br><em>en cinq gestes</em></h2>
+    <span class="etiquette reveal"><b>Exemples de présentation</b> — Le salon ne publie aucun service en ligne : les services ci-dessous sont des exemples généraux du métier, montrés pour vous donner une idée de la page.</span>
+    <div class="svc-liste">
+      <article class="svc reveal"><span class="num">01</span><h3>Coupes</h3><p>Une coupe adaptée à la forme de votre visage et à la texture de vos cheveux, du simple rafraîchissement des pointes au changement de style complet.</p></article>
+      <article class="svc reveal"><span class="num">02</span><h3>Coloration</h3><p>La coloration permanente ou semi-permanente, pour couvrir les cheveux blancs ou adopter une nouvelle teinte, appliquée uniformément de la racine aux pointes.</p></article>
+      <article class="svc reveal"><span class="num">03</span><h3>Mèches et balayage</h3><p>Des éclaircissements placés en mèches ou fondus en balayage, pour illuminer la chevelure et lui donner du relief avec un effet naturel.</p></article>
+      <article class="svc reveal"><span class="num">04</span><h3>Brushing et mise en plis</h3><p>Un séchage travaillé à la brosse ou une mise en plis, pour une coiffure nette et tenue, le temps d'une occasion ou pour le plaisir de cheveux bien placés.</p></article>
+      <article class="svc reveal"><span class="num">05</span><h3>Traitements capillaires</h3><p>Des soins qui nourrissent et renforcent les cheveux secs ou fragilisés, pour retrouver douceur, souplesse et brillance.</p></article>
+    </div>
+    <p class="note-appel reveal">Pour la liste complète des services et les prix, appelez au <a href="tel:+14507711441">450-771-1441</a>.</p>
+  </div>
+</section>
+
+<div class="coupe" aria-hidden="true"><span>✂</span></div>
+
+<section id="heures">
+  <div class="wrap">
+    <p class="kicker reveal">Nos heures</p>
+    <h2 class="reveal">La semaine<br><em>en un coup d'œil</em></h2>
+    <div class="jours reveal">
+      <div class="jour ferme"><b>Lundi</b><span>Fermé</span></div>
+      <div class="jour ouvert"><b>Mardi</b><span>9 h à 16 h</span></div>
+      <div class="jour ouvert"><b>Mercredi</b><span>9 h à 16 h</span></div>
+      <div class="jour ouvert"><b>Jeudi</b><span>9 h à 19 h</span><span class="soir">En soirée</span></div>
+      <div class="jour ouvert"><b>Vendredi</b><span>9 h à 20 h</span><span class="soir">En soirée</span></div>
+      <div class="jour ouvert"><b>Samedi</b><span>9 h à 12 h</span></div>
+      <div class="jour ferme"><b>Dimanche</b><span>Fermé</span></div>
+    </div>
+  </div>
+</section>
+
+<section class="contact">
+  <div class="wrap">
+    <p class="kicker reveal">Nous trouver</p>
+    <h2 class="reveal">Rue Martel,<br>Saint-Hyacinthe</h2>
+    <div class="grille">
+      <div class="bloc reveal">
+        <b>Adresse</b>
+        <p class="adr">2360 rue Martel<br>Saint-Hyacinthe, QC J2T 1Y4</p>
+        <p style="margin-top:18px"><a href="tel:+14507711441" class="tel-grand">450-771-1441</a></p>
+      </div>
+      <div class="bloc reveal">
+        <b>Bon à savoir</b>
+        <p class="note">Stationnement accessible en fauteuil roulant.</p>
+        <p class="note" style="margin-top:10px">Jeudi et vendredi, le salon reste ouvert en soirée — jusqu'à 19 h le jeudi et 20 h le vendredi.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <b>Salon Clip Coiffure</b> — Saint-Hyacinthe<br>
+  Exemple de site réalisé par <b>Votre Vitrine</b> — ce n'est pas le site officiel du salon.
+</footer>
+
+<div class="barre">
+  <a class="a1" href="tel:+14507711441">📞 Appeler</a>
+  <a class="a2" href="#heures">Voir les heures</a>
+</div>
+
+<script>
+const io = new IntersectionObserver(es => es.forEach(e => { if (e.isIntersecting) { e.target.classList.add('vu'); io.unobserve(e.target); } }), {threshold: .12});
+document.querySelectorAll('.reveal').forEach(el => io.observe(el));
+</script>
+</body>
+</html>
