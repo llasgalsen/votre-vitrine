@@ -176,7 +176,8 @@ body.voyage .progres{display:block}
 .gv-slide::before{content:"";position:absolute;inset:-24px;background-image:var(--fond);background-size:cover;background-position:center;filter:blur(16px) brightness(.5)}
 .gv-img{position:relative;z-index:1;width:100%;height:100%;object-fit:contain;opacity:1;transition:none}
 .gv-bas{position:static;padding:20px 20px 0;max-width:600px;margin:0 auto}
-.gv-legende{min-height:98px}
+.gv-legende{min-height:120px}
+.gv-partie{font:600 11px/1 Inter,sans-serif;letter-spacing:.22em;text-transform:uppercase;color:var(--or);margin-bottom:7px}
 .bandeau{padding-right:172px;text-align:left}
 @media(min-width:760px){.visite{padding-bottom:52px}}
 </style>
@@ -216,6 +217,7 @@ body.voyage .progres{display:block}
   </div>
   <div class="gv-bas">
     <div class="gv-legende" id="gv-legende">
+      <div class="gv-partie" id="gv-partie">La visite · Les lieux</div>
       <div class="gv-titre" id="gv-titre">La salle à manger</div>
       <div class="gv-sous" id="gv-sous">Dans une maison de 1876, au centre-ville de Saint-Hyacinthe</div>
     </div>
@@ -416,12 +418,12 @@ body.voyage .progres{display:block}
   var section = document.getElementById('visite');
   if (!section) return;
   var arrets = [
-    {t:'La salle à manger', s:'Dans une maison de 1876, au centre-ville de Saint-Hyacinthe'},
-    {t:'La terrasse', s:'Derrière la maison, à l\u2019écart de la circulation'},
-    {t:'La terrasse, au crépuscule', s:'Le verre gravé au nom de la maison'},
-    {t:'Les tartares', s:'La spécialité de la maison — le plateau pour deux : 100 $'},
-    {t:'La table', s:'Cuisine de marché, produits d\u2019ici'},
-    {t:'Le doux', s:'Desserts et cafés, pour finir en douceur'}
+    {p:'La visite · Les lieux', t:'La salle à manger', s:'Le cœur de la maison de 1876 : lustres, brique et plafond d’étain'},
+    {p:'La visite · Les lieux', t:'La terrasse', s:'Derrière la maison, à l’écart de la circulation'},
+    {p:'La visite · Les lieux', t:'La terrasse, au crépuscule', s:'Quand le soir tombe sur la terrasse'},
+    {p:'La visite · À table', t:'Les tartares', s:'La spécialité de la maison — le plateau pour deux : 100 $'},
+    {p:'La visite · À table', t:'La table', s:'Cuisine de marché, produits d’ici'},
+    {p:'La visite · À table', t:'Le doux', s:'Desserts et cafés, pour finir en douceur'}
   ];
   var slides = [].slice.call(section.querySelectorAll('.gv-slide'));
   slides.forEach(function(sl){ var im = sl.querySelector('img'); if (im) sl.style.setProperty('--fond', 'url("' + im.src + '")'); });
@@ -445,6 +447,7 @@ body.voyage .progres{display:block}
     points.forEach(function(d, i){ d.classList.toggle('actif', i === actuel); });
     titre.textContent = arrets[actuel].t;
     sous.textContent = arrets[actuel].s;
+    document.getElementById('gv-partie').textContent = arrets[actuel].p;
     compteur.textContent = actuel === arrets.length - 1 ? 'Dernière étape — continuez en défilant' : 'Étape ' + (actuel + 1) + ' sur ' + arrets.length;
     prec.disabled = actuel === 0;
     suiv.textContent = actuel === arrets.length - 1 ? '↓' : '›';
